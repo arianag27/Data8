@@ -1,22 +1,25 @@
-# Xeus-Lite Data 8 Demo
+# CSCI 9 — JupyterLite 
 
-[![lite-badge](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://jedwin321.github.io/xeus-lite-demo/)
+[![lite-badge](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://jupyterlite.rtfd.io/en/latest/)
 
-This deployment has the packages needed to work through [Data 8](https://data8.org/)–style materials in the browser. All notebooks and assets from [`data-8/materials-fds`](https://github.com/data-8/materials-fds) live under **`materials-fds/`** in the file browser.
+Run **CSCI 9** lecture and lab notebooks in the browser—no local install required. All materials live under **`csci9-sp26-student/`** in the file browser.
 
-## Course calendar (overview)
+## Materials layout
 
-Use this table as a map into the bundled `materials-fds` tree. Adjust dates/links each term as needed.
+| Area | Path |
+| --- | --- |
+| Lectures | `csci9-sp26-student/lecture/` |
+| Labs | `csci9-sp26-student/lab/` |
+| Course index | `csci9-sp26-student/README.md` |
 
-| Week | Topics | Materials |
-| --- | --- | --- |
-| 1 | Introduction; Python basics | `materials-fds/lectures/`, `materials-fds/lab/lab01/` |
-| 2–4 | Tables, visualizations, functions | `materials-fds/lab/lab02/` … `lab04/` |
-| 5–8 | Sampling, models, confidence | `materials-fds/lab/lab05/` … `lab08/` |
-| 9–12 | Hypothesis testing, regression, wrap-up | `materials-fds/lab/lab09/` … `lab12/`, `materials-fds/hw/` |
+## Home page
 
-**Homework:** `materials-fds/hw/` · **Projects:** `materials-fds/project/` · **Demos:** open `demo.ipynb` at the root of the file listing.
+The deployed site uses a **weekly schedule** on the home page with links into each notebook (`./lab/index.html?path=csci9-sp26-student/...`). Adjust dates and ordering in `landing/index.html` to match your syllabus.
 
-For the canonical Data 8 schedule and links, see **[data8.org/materials-fds](https://data8.org/materials-fds/)**.
+## Local build (optional)
 
-On the deployed site, the **home page** is a course calendar (topics and dates aligned with [data8.org/materials-fds](https://data8.org/materials-fds/)) with links straight into each notebook.
+```bash
+micromamba create -f .github/build-environment.yml
+jupyter lite build --contents content --output-dir dist
+cp landing/index.html dist/index.html
+```
