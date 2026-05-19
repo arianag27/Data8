@@ -1,0 +1,8 @@
+{
+  "LiteBuildConfig": {
+    "extra_ignore_contents": [
+      "/\\.OTTER_LOG$",
+      "/\\.ipynb_checkpoints"
+    ]
+  }
+}

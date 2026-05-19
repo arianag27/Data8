@@ -4,6 +4,7 @@ channels:
 dependencies:
   - python
   - pip
+  # jupyter_server is required for api/contents/all.json indexing at build time
   - jupyter_server
-  - jupyterlite-core >=0.6
+  - jupyterlite-core >=0.6,<0.8
   - jupyterlite-xeus >=4

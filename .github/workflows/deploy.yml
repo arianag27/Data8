@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -25,13 +25,25 @@ jobs:
           environment-file: .github/build-environment.yml
           cache-environment: true
 
+      - name: Verify content has no broken symlinks
+        run: |
+          broken=$(find content -type l ! -exec test -e {} \; -print)
+          if [ -n "$broken" ]; then
+            echo "Broken symlinks under content/ (fix or remove before deploy):"
+            echo "$broken"
+            exit 1
+          fi
+
       - name: Build the JupyterLite site
         shell: bash -l {0}
         run: |
           cp README.md content
+          rm -f .jupyterlite.doit.db
           jupyter lite build --contents content --output-dir dist
           test -f landing/index.html
           cp landing/index.html dist/index.html
+          test -f dist/api/contents/all.json
+          echo "Contents index: dist/api/contents/all.json ($(wc -c < dist/api/contents/all.json) bytes)"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
